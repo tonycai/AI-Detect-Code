@@ -1,0 +1,18 @@
+FROM qingcloud/pytorch:0.4.0-py36-cpu-cu91-cudnn7.1
+
+ENV PIP_INDEX_URL=http://pypi.doubanio.com/simple/ PIP_TRUSTED_HOST=pypi.doubanio.com
+
+RUN pip install --upgrade pip \
+    && pip install \
+    torchnet\
+    opencv-python==3.4.0.12 \
+    gunicorn==19.8.1 \
+    gevent==1.3.4 \
+    Flask==1.0.2
+
+RUN apt-get install -y libzbar0 \
+    && pip install pyzbar==0.1.7
+
+COPY . /app
+
+WORKDIR /app
