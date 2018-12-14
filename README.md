@@ -1,2 +1,2 @@
-# AI-Authentic-Code
-AI-Authentic-Code
+# AI-Detect-Code
+AI-Detect-Code
