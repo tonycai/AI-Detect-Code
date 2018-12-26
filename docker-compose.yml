@@ -1,0 +1,18 @@
+version: "3"
+services:
+    server:
+        build: .
+        volumes:
+            - .:/app/
+            - /data/smart_identity_data:/data/smart_identity_data
+        env_file:
+            - docker.dev.env
+        ports:
+            - "3000:3000"
+        logging:
+            driver: "json-file"
+            options:
+                max-size: "10M"
+                max-file: "2"
+        command: gunicorn -w 2 -b 0.0.0.0:3000 -k gevent server:app
+        container_name: smart_identify_server_1

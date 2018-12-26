@@ -2,20 +2,55 @@
 
 import sys
 
-from . import resnet, licence_red_stamp, human_face_recognition, ocr_web_image, face_detect, face_match, qrcode
+from . import resnet, inception_v3, dense_net
 from .error import ModelError
 from lib import storage
 
 _recognizer_cache = {}
 
 _rec_config = {
-    'AJ_Res': {
+    'AJ_insole': {  # 鞋垫
         'model_type': 'resnet',
         'model_config': {
             'num_epochs': 50,
-            'fixed_param': False,
-            'model_type': 50,
-            'pretrained_model_name': 'resnet50-19c8e357.pth',
+            'fixed_param': True,
+            'model_type': 18,
+            'version_in_use': storage.VERSION_LATEST
+        }
+    },
+    'AJ_sole': {  # 鞋底
+        'model_type': 'resnet',
+        'model_config': {
+            'num_epochs': 50,
+            'fixed_param': True,
+            'model_type': 18,
+            'version_in_use': storage.VERSION_LATEST
+        }
+    },
+    'AJ_body': {  # 鞋身
+        'model_type': 'resnet',
+        'model_config': {
+            'num_epochs': 50,
+            'fixed_param': True,
+            'model_type': 18,
+            'version_in_use': storage.VERSION_LATEST
+        }
+    },
+    'AJ_inner_body': {  # 鞋内部
+        'model_type': 'resnet',
+        'model_config': {
+            'num_epochs': 50,
+            'fixed_param': True,
+            'model_type': 18,
+            'version_in_use': storage.VERSION_LATEST
+        }
+    },
+    'AJ_tongue': {  # 鞋舌
+        'model_type': 'resnet',
+        'model_config': {
+            'num_epochs': 50,
+            'fixed_param': True,
+            'model_type': 18,
             'version_in_use': storage.VERSION_LATEST
         }
     }

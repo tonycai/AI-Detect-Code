@@ -2,7 +2,10 @@
 
 import time
 from torchvision import transforms
-from lib import torch_util, torch_model, storage
+from lib import torch_util, storage
+from abc import abstractmethod
+import torch.nn as nn
+import torch.optim as optim
 
 
 class RecognizerBase(object):
@@ -49,6 +52,7 @@ class TorchBase(RecognizerBase):
 
         criterion = nn.NLLLoss()
 
+        model = self._get_model(len(labels))
         # Observe that all parameters are being optimized
         optimizer = optim.SGD(filter(lambda p: p.requires_grad, model.parameters()), lr=0.001, momentum=0.9)
 
@@ -56,7 +60,7 @@ class TorchBase(RecognizerBase):
         scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=7, gamma=0.1)
 
         torch_util.train_model(
-            self._get_model(len(labels)),
+            model,
             criterion,
             optimizer,
             scheduler,
@@ -68,7 +72,7 @@ class TorchBase(RecognizerBase):
         model_data = {
             'labels': labels,
             'version': int(time.time()),
-            'model': torch_util.dump_model(conf['model'])
+            'model': torch_util.dump_model(model)
         }
         model_path = storage.get_local_path(storage.TYPE_MODEL, self.rec_type, model_data['version'])
         torch_util.store_data(model_data, model_path)

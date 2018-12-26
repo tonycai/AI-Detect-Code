@@ -7,7 +7,6 @@ from lib.logger import get_logger
 
 logger = get_logger('train')
 
-
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='模型训练脚本')
     parser.add_argument('rec_type', help='识别类别')

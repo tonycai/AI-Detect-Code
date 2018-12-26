@@ -1,9 +1,9 @@
 # -*- coding:utf-8 -*-
 
-import time
-from torchvision import transforms
 from lib import torch_util, torch_model, storage
 from .base import TorchBase
+from torchvision import models
+from model.error import ModelError
 
 
 class Recognizer(TorchBase):

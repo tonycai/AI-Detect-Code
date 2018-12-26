@@ -18,7 +18,7 @@ device_id = 'cuda:0' if torch.cuda.is_available() else 'cpu'
 device = torch.device(device_id)
 
 
-def get_dataloader(folder, transform, batch_size=100, num_workers=4):
+def get_data_loader(folder, transform, batch_size=100, num_workers=4):
     dataset = datasets.ImageFolder(folder, transform)
     return torch.utils.data.DataLoader(dataset, batch_size=batch_size, shuffle=True, num_workers=num_workers)
 

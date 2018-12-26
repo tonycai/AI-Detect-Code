@@ -5,7 +5,7 @@ import glob
 
 from .error import BizError
 
-LOCAL_DIR = '/data'
+LOCAL_DIR = '/data/smart_identity_data'
 
 TYPE_MODEL = 'model'
 TYPE_SAMPLE = 'sample'
