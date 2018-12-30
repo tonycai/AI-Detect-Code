@@ -15,10 +15,11 @@ from lib.error import BizError
 
 
 app = Flask(__name__)
+app.config['JSON_AS_ASCII'] = False
+
 logger = get_logger('server')
 
-
-@app.route('/recognize', methods=['GET', 'POST'])
+@app.route('/recognize', methods=['POST'])
 def recognize():
     rec_type = request.values.get('type')
     if not rec_type:

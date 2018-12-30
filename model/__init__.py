@@ -9,7 +9,7 @@ from lib import storage
 _recognizer_cache = {}
 
 _rec_config = {
-    'AJ_insole': {  # 鞋垫
+    'AJ#insole': {  # 鞋垫
         'model_type': 'resnet',
         'model_config': {
             'num_epochs': 50,
@@ -18,7 +18,7 @@ _rec_config = {
             'version_in_use': storage.VERSION_LATEST
         }
     },
-    'AJ_sole': {  # 鞋底
+    'AJ#sole': {  # 鞋底
         'model_type': 'resnet',
         'model_config': {
             'num_epochs': 50,
@@ -27,7 +27,7 @@ _rec_config = {
             'version_in_use': storage.VERSION_LATEST
         }
     },
-    'AJ_body': {  # 鞋身
+    'AJ#body': {  # 鞋身
         'model_type': 'resnet',
         'model_config': {
             'num_epochs': 50,
@@ -36,7 +36,7 @@ _rec_config = {
             'version_in_use': storage.VERSION_LATEST
         }
     },
-    'AJ_inner_body': {  # 鞋内部
+    'AJ#inner_body': {  # 鞋内部
         'model_type': 'resnet',
         'model_config': {
             'num_epochs': 50,
@@ -45,7 +45,7 @@ _rec_config = {
             'version_in_use': storage.VERSION_LATEST
         }
     },
-    'AJ_tongue': {  # 鞋舌
+    'AJ#tongue': {  # 鞋舌
         'model_type': 'resnet',
         'model_config': {
             'num_epochs': 50,

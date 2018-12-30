@@ -4,7 +4,7 @@ services:
         build: .
         volumes:
             - .:/app/
-            - /data/smart_identity_data:/data/smart_identity_data
+            - /data/smart_identify_data:/data/smart_identify_data
         env_file:
             - docker.dev.env
         ports:
