@@ -50,10 +50,10 @@ def get_version_from_path(path):
 def upload(type_, name, version=None):
     path = get_local_path(type_, name, version)
     if not path:
-        raise BizError('数据不存在：{}, {}, {}'.format(type_, name, version))
+        raise BizError('data not found: {}, {}, {}'.format(type_, name, version))
 
     if not os.path.isfile(path):
-        raise BizError('文件不存在：{}'.format(path))
+        raise BizError('file not found: {}'.format(path))
 
     # @todo upload to db
 
@@ -67,7 +67,7 @@ def download(type_, name, version=None):
 
     # @todo download from db
 
-    raise BizError('数据不存在：{}, {}, {}, {}'.format(type_, name, version, path))
+    raise BizError('data not found: {}, {}, {}, {}'.format(type_, name, version, path))
 
 
 def delete_old(type_, name, left_count=3):

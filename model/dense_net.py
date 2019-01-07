@@ -19,7 +19,7 @@ class Recognizer(TorchBase):
         elif model_type == 201:
             model = models.densenet201(pretrained=True)
         else:
-            raise ModelError('非法的模型类型')
+            raise ModelError('invalid model_type')
 
         type_model_map = {
             121: 'densenet121-a639ec97.pth',

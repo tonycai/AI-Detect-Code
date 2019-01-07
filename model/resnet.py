@@ -21,7 +21,7 @@ class Recognizer(TorchBase):
         elif model_type == 101:
             model = models.resnet101(pretrained=True)
         else:
-            raise ModelError('非法的模型类型')
+            raise ModelError('invalid model_type')
 
         type_model_map = {
             18: 'resnet18-5c106cde.pth',

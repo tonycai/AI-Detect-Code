@@ -23,7 +23,7 @@ logger = get_logger('server')
 def recognize():
     rec_type = request.values.get('type')
     if not rec_type:
-        return jsonify({'error_msg': 'type 不能为空'})
+        return jsonify({'error_msg': 'type is required'})
 
     image = request.values.get('image')
     if image:
@@ -39,9 +39,9 @@ def recognize():
                     (datetime.datetime.now() - start_time).total_seconds()
                 ))
             except URLError as e:
-                return jsonify({'error_msg': '[图片下载失败]{}'.format(e)})
+                return jsonify({'error_msg': '[image downlod fail]{}'.format(e)})
         else:
-            return jsonify({'error_msg': 'image 或 image_url 不能为空'})
+            return jsonify({'error_msg': 'image or image_url is required'})
 
     start_time = datetime.datetime.now()
 
@@ -49,7 +49,7 @@ def recognize():
         recognizer = get_recognizer(rec_type)
         result = recognizer.recognize(image)
     except BizError as e:
-        return jsonify({'error_msg': '[识别错误]{}'.format(e)})
+        return jsonify({'error_msg': '[recognize error]{}'.format(e)})
 
     logger.info('{} {:.2f}s'.format(
         rec_type, (datetime.datetime.now() - start_time).total_seconds()
