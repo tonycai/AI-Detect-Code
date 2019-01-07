@@ -53,6 +53,24 @@ _rec_config = {
             'model_type': 18,
             'version_in_use': storage.VERSION_LATEST
         }
+    },
+    'AJ#shoe_tag': {  # 鞋标
+        'model_type': 'resnet',
+        'model_config': {
+            'num_epochs': 50,
+            'fixed_param': True,
+            'model_type': 18,
+            'version_in_use': storage.VERSION_LATEST
+        }
+    },
+    'AJ#shoebox': {  # 鞋盒
+        'model_type': 'resnet',
+        'model_config': {
+            'num_epochs': 50,
+            'fixed_param': True,
+            'model_type': 18,
+            'version_in_use': storage.VERSION_LATEST
+        }
     }
 }
 
