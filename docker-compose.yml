@@ -5,6 +5,7 @@ services:
         volumes:
             - .:/app/
             - /data/smart_identify_data:/data/smart_identify_data
+            - /data/smart_identify_data/model:/root/.torch/models/
         env_file:
             - docker.dev.env
         ports:

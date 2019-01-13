@@ -9,7 +9,9 @@ RUN pip install \
     opencv-python==3.4.0.12 \
     gunicorn==19.8.1 \
     gevent==1.3.4 \
-    Flask==1.0.2
+    Flask==1.0.2 \
+    Flask-Cors==3.0.7
+
 
 RUN apt-get update \
     && apt-get install -y libzbar0 \

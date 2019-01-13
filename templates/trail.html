@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='uploader.css')}}">
+
+    <title>斗牛 | 智能鉴定</title>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">斗牛 | 智能鉴定</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div class="row justify-content-md-center mt-4">
+            <div class="col-lg-9">
+                <form id="trail-form">
+                    <div class="alert alert-primary result-banner" role="alert">
+                        【快来调教小机器人娜美】选择测试类型，上传你想测试的图片！
+                        <hr>
+                        <p class="result-notice text-danger"></p>
+                    </div>
+                    <div class="form-group">
+                        <label>选择测试类型</label>
+                        <select class="form-control" name="type">
+                            <option value="">请选择</option>
+                            <option value="AJ#insole">AJ#鞋垫</option>
+                            <option value="AJ#shoe_tag">AJ#鞋标</option>
+                            <option value="AJ#shoebox">AJ#鞋盒</option>
+                            <option value="AJ#inner_body">AJ#鞋内部</option>
+                            <option value="AJ#body">AJ#鞋身</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>上传测试图片</label>
+                        <div class="file-uploader"></div>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-info" id="trail-submit-btn">提交</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <script type="text/javascript" src="{{ url_for('static',filename='uploader.js')}}"></script>
+    <script type="text/javascript">
+        (function ($) {
+            $('.file-uploader').fileUploader();
+
+            var trailForm = '#trail-form';
+            $('body').on('submit', trailForm, function (e) {
+                e.preventDefault()
+                var data = {
+                    type: $(trailForm).find('[name="type"]').val()
+                };
+                var postData = function (base64, onsuccess) {
+                    data.image = base64;
+                    $.post('http://127.0.0.1:3000/recognize', data, function (res) { //http://47.99.64.169:3000/recognize
+                        if (res.error_msg !== undefined) {
+                            alert('操作失败，原因：' + res.error_msg);
+                            return false;
+                        }
+
+                        onsuccess(res);
+                        return false;
+                    });
+
+                    return false;
+                };
+
+                var counter = {
+                    fake: 0,
+                    other: 0,
+                    real: 0
+                };
+                var $resultNotice = $('.result-banner .result-notice');
+                var updateResultNotice = function (couter) {
+                    var text = '';
+                    $.each(counter, function (key, value) {
+                        text += '   ' + key + ': ' + value;
+                    });
+                    $resultNotice.text('【娜美播报】' + text);
+                };
+                $.each($(trailForm).serializeArray(), function (index, value) {
+                    if (value.name == 'files[]') {
+                        postData((value.value).split(',')[1], function (res) {
+                            var resultHtml = '';
+                            var keysSorted = Object.keys(res.labels).sort(function (a, b) { return res.labels[b] - res.labels[a] });
+
+                            counter[keysSorted[0]] = counter[keysSorted[0]] + 1;
+                            updateResultNotice(counter);
+                            var classes = ['badge-danger', 'badge-warning', 'badge-info'];
+                            $.each(keysSorted, function (k, v) {
+                                resultHtml += '<span class="badge ' + classes[k] + '">' + v + ': ' + (res.labels[v]).toFixed(6) + '</span>';
+                            });
+                            var $li = $('li.img-item').eq(index - 1);
+                            $li.find('div.result').html('');
+                            $li.append('<div class="result pl-1 pb-1">' + resultHtml + '</div>');
+                        });
+                    }
+                });
+
+                return false;
+            });
+        })(jQuery);
+    </script>
+</body>
+
+</html>

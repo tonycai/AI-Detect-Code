@@ -78,8 +78,18 @@ class TorchBase(RecognizerBase):
         torch_util.store_data(model_data, model_path)
 
     def recognize(self, image_str):
+        mapping = {
+            '真': 'real',
+            '假': 'fake',
+            '非': 'other'
+        }
+        labels = torch_util.predict_str(self.model, self.labels, self.transform, image_str)
+        formatLabels = {}
+        for key, val in labels.items():
+            newKey = mapping[key] if mapping[key] else key
+            formatLabels[newKey] = val
         return {
-            'labels': torch_util.predict_str(self.model, self.labels, self.transform, image_str)
+            'labels': formatLabels
         }
 
     @abstractmethod

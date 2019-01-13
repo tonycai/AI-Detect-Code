@@ -6,7 +6,8 @@ from urllib.request import urlopen
 import base64
 import datetime
 
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
+from flask_cors import CORS
 
 from model import get_recognizer
 
@@ -15,9 +16,11 @@ from lib.error import BizError
 
 
 app = Flask(__name__)
+CORS(app)
 app.config['JSON_AS_ASCII'] = False
 
 logger = get_logger('server')
+
 
 @app.route('/recognize', methods=['POST'])
 def recognize():
@@ -56,6 +59,11 @@ def recognize():
     ))
 
     return jsonify(result)
+
+
+@app.route('/<string:page_name>/')
+def render_static(page_name):
+    return render_template('%s.html' % page_name)
 
 
 if __name__ == '__main__':
