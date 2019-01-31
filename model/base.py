@@ -86,7 +86,7 @@ class TorchBase(RecognizerBase):
         labels = torch_util.predict_str(self.model, self.labels, self.transform, image_str)
         formatLabels = {}
         for key, val in labels.items():
-            newKey = mapping[key] if mapping[key] else key
+            newKey = mapping[key] if key in mapping else key
             formatLabels[newKey] = val
         return {
             'labels': formatLabels
