@@ -12,8 +12,8 @@ _rec_config = {
     'AJ#insole': {  # 鞋垫
         'model_type': 'resnet',
         'model_config': {
-            'num_epochs': 50,
-            'fixed_param': True,
+            'num_epochs': 25,
+            'fixed_param': False,
             'model_type': 18,
             'version_in_use': storage.VERSION_LATEST
         }
@@ -21,8 +21,8 @@ _rec_config = {
     'AJ#sole': {  # 鞋底
         'model_type': 'resnet',
         'model_config': {
-            'num_epochs': 50,
-            'fixed_param': True,
+            'num_epochs': 25,
+            'fixed_param': False,
             'model_type': 18,
             'version_in_use': storage.VERSION_LATEST
         }
@@ -30,8 +30,8 @@ _rec_config = {
     'AJ#body': {  # 鞋身
         'model_type': 'resnet',
         'model_config': {
-            'num_epochs': 50,
-            'fixed_param': True,
+            'num_epochs': 25,
+            'fixed_param': False,
             'model_type': 18,
             'version_in_use': storage.VERSION_LATEST
         }
@@ -39,8 +39,8 @@ _rec_config = {
     'AJ#inner_body': {  # 鞋内部
         'model_type': 'resnet',
         'model_config': {
-            'num_epochs': 50,
-            'fixed_param': True,
+            'num_epochs': 25,
+            'fixed_param': False,
             'model_type': 18,
             'version_in_use': storage.VERSION_LATEST
         }
@@ -48,8 +48,8 @@ _rec_config = {
     'AJ#tongue': {  # 鞋舌
         'model_type': 'resnet',
         'model_config': {
-            'num_epochs': 50,
-            'fixed_param': True,
+            'num_epochs': 25,
+            'fixed_param': False,
             'model_type': 18,
             'version_in_use': storage.VERSION_LATEST
         }
@@ -57,8 +57,8 @@ _rec_config = {
     'AJ#shoe_tag': {  # 鞋标
         'model_type': 'resnet',
         'model_config': {
-            'num_epochs': 50,
-            'fixed_param': True,
+            'num_epochs': 25,
+            'fixed_param': False,
             'model_type': 18,
             'version_in_use': storage.VERSION_LATEST
         }
@@ -66,8 +66,8 @@ _rec_config = {
     'AJ#shoebox': {  # 鞋盒
         'model_type': 'resnet',
         'model_config': {
-            'num_epochs': 50,
-            'fixed_param': True,
+            'num_epochs': 25,
+            'fixed_param': False,
             'model_type': 18,
             'version_in_use': storage.VERSION_LATEST
         }
